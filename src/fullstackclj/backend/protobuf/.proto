@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package clj_proto;
+
+option java_multiple_files = true;
+option java_package = "com.fullstackclj.clj_proto";
+option java_outer_classname = "FullstackcljProtobuf";
+
+message Request{
+    enum REQUEST_TYPE {
+        TYPE_TEST=0;
+    }
+    required REQUEST_TYPE Type=1;
+    required string Data=2;
+}

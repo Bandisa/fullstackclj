@@ -6,3 +6,9 @@
                  :http_vers "http/1.1"
                  :headers ["a: s" "b: q"]
                  :body "body"}}})
+
+(def response_test_data
+  [{:http_vers "HTTP/1.1"
+    :status_code 200
+    :status_info "SUCCESS"
+    :headers {} :body nil}])

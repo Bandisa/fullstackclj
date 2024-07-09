@@ -1,5 +1,4 @@
 (ns fullstackclj.core
-  (:require [fullstackclj.backend.config :as config])
   (:require [fullstackclj.backend.server :as socket])
   (:gen-class))
 
