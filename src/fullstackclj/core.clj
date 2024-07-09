@@ -1,7 +1,9 @@
 (ns fullstackclj.core
+  (:require [fullstackclj.backend.config :as config])
+  (:require [fullstackclj.backend.server :as socket])
   (:gen-class))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "Start server"
   [& args]
-  (println "Hello, World!"))
+  (socket/start-server))
