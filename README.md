@@ -13,6 +13,7 @@ This was project was created for learning purposes
 - Implement an http/rpc application that can handle `10 concurrent connections`, serving
 a simple single page web app with auth and some `crud` operations
 - The web app will use `ClojureScript`
+- Use TDD
 
 ### Phase 1
 
@@ -35,14 +36,13 @@ a simple single page web app with auth and some `crud` operations
 
 1. `Java 22.0.1 OpenJDK`:- [Installation Instructions](https://jdk.java.net/22/)
 2. `Leiningen 2.11.2`:- [Installation Instructions](https://wiki.leiningen.org/Packaging)
-3.
 
 ### Installation steps
 
 1. Clone the repo
 
 ```sh
-    git clone FIXME: Add repo link && cd fullstackclj
+    git clone https://github.com/Bandisa/fullstackclj.git && cd fullstackclj
 ```
 
 2. Compile the app into a single standalone executable jar file

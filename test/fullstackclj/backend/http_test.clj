@@ -17,4 +17,4 @@
 (deftest http-test-response
   (testing "Response, Should return a string of the http request")
   (is (= true (string? (response (first response_test_data)))))
-  (is (= "HTTP/1.1 200 SUCCESS\r\n\r\n" (response (first response_test_data)))))
+  (is (= "HTTP/1.1 200 SUCCESS\r\nContent-Length: 0\r\n\r\n" (response (first response_test_data)))))
