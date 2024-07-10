@@ -37,5 +37,5 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/project.clj') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Run Leiningen tests
-        run: lein test
+      - name: Run Clojure tests and Gen Coverage
+        run: lein cloverage

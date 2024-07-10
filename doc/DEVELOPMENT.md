@@ -11,6 +11,9 @@ This document provides instructions on setting up the development environment fo
 
 ## Usage
 
+### CI/CD
+
+test github actions locally
 `act <GITHUB_ACTION>` will run all workflows triggered by the `<GITHUB_ACTION>`
 
 **example**
@@ -18,3 +21,17 @@ This document provides instructions on setting up the development environment fo
 `act push`
 
 ![example output](../resources/examples/ci_cd.png)
+
+### Testing
+
+Run unit tests without any coverage
+
+```sh
+    lein test
+```
+
+Run unit tests and generate test coverage
+
+```sh
+    lein cloverage
+```
