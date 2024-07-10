@@ -9,8 +9,8 @@
 
 (deftest http-test-parser
   (testing "Parser, Should return a map of the http request as: {:method :url :http_vers :headers :body}")
-  (is (= true (map? (parse "GET / "))))
-  (is (= true (contains_http_params? (parse "GET / \r\na:s\r\nb:q\r\n\r\nbody"))))
+  (is (= true (map? (parse ["GET / "]))))
+  (is (= true (contains_http_params? (parse ["GET / " {:a "s", :b "q"} "body"]))))
   (is (= true (has-key-values? (parse (get-in parser_test_data [:case1 :req]))
                                (get-in parser_test_data [:case1 :res])))))
 
