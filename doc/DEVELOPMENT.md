@@ -5,7 +5,7 @@ This document provides instructions on setting up the development environment fo
 ## Prerequisites
 
 1. `Docker`: Ensure Docker is installed on your machine. You can download and install Docker from [here](https://www.docker.com/products/docker-desktop).
-2. `Act`: For running docker actions locally. [Installation](https://nektosact.com/installation/index.html)
+2. `Act`: For running github actions locally. [Installation](https://nektosact.com/installation/index.html)
 
 ## Setting Up the Development Environment
 
