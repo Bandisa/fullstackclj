@@ -2,7 +2,7 @@
 
 ## Info
 
-This was project was created for learning purposes
+This project was created for learning purposes
 
 ## Goals
 
