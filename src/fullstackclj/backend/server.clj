@@ -1,8 +1,7 @@
 (ns fullstackclj.backend.server
   (:require [clojure.string :as str]
             [fullstackclj.backend.config :as config]
-            [fullstackclj.backend.helpers.http :as http]
-            [fullstackclj.backend.rest.core :as rest])
+            [fullstackclj.backend.helpers.http :as http])
   (:import (java.io BufferedReader InputStreamReader PrintWriter)
            (java.net InetAddress ServerSocket)))
 
@@ -19,14 +18,11 @@
                           (recur (.readLine in)
                                  (assoc header (str/lower-case (first header_kv)) (last header_kv))))))
           content_len (Integer/parseInt (get headers "content-length" "0"))
-          body (char-array (when (> content_len 0) content_len))]
+          body (char-array (when (> content_len 0) content_len))
+          request (http/parse [req_line headers ""])]
       (.read in body 0 content_len)
-      (println (http/parse [req_line headers (String. body)])))
-
-    (.println out (rest/response {:http_vers "HTTP/1.1"
-                                  :status_code 200
-                                  :status_info "SUCCESS"
-                                  :body "some data"}))
+      ;;TODO: Auth
+      (.println out (http/handle (assoc request :body (String. body)))))
     (.flush out)))
 
 (defn start-server
