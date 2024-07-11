@@ -5,4 +5,4 @@
   [request]
   (rest/response {:http_vers "HTTP/1.1" :status_code 200 :status_info "SUCCESS"
                   :headers {"Content-type" "text/plain"}
-                  :body (get request :body)}))
+                  :body (get request :body "")}))
