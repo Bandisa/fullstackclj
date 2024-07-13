@@ -4,4 +4,4 @@
 (defn test-procedure
   "Test procedure"
   [request]
-  (rpc/response "HTTP/1.1" 200 "SUCCESS" {} request))
+  (rpc/response "HTTP/1.1" 200 "SUCCESS" {"Content-Encoding" "UTF-8"} request))

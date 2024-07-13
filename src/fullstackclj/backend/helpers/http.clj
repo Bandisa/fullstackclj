@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [fullstackclj.backend.rest.handlers.test-handler :refer [test-handler]]
             [fullstackclj.backend.rpc.procedures.test-procedure :refer [test-procedure]])
-  (:import [com.fullstackclj.proto Request Request$REQUEST_TYPE]))
+  (:import [com.fullstackclj.proto Request]))
 
 (def method_regx #"(?i)(?:GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|TRACE|CONNECT)")
 (def http_vers_regx #"(?i)(?:HTTP)\/\d\.\d")
@@ -31,11 +31,8 @@
 
 (defn handle_rpc
   "Handles a rpc request"
-  [procedure bit_string]
-  (let [proto (.build
-               (.setData
-                (.setType (Request/newBuilder)
-                          Request$REQUEST_TYPE/TYPE_TEST) bit_string))]
+  [procedure byte_str]
+  (let [proto (Request/parseFrom (.getBytes byte_str))]
     (println "rpc request: " (.toString proto))
     (case procedure
       "test-procedure" (test-procedure proto))))
