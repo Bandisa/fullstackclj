@@ -1,8 +1,10 @@
 (ns fullstackclj.backend.helpers.http
   (:require [clojure.string :as str]
+            [fullstackclj.backend.rest.core :as rest]
             [fullstackclj.backend.rest.handlers.test-handler :refer [test-handler]]
             [fullstackclj.backend.rpc.procedures.test-procedure :refer [test-procedure]])
-  (:import [com.fullstackclj.proto Request]))
+  (:import [com.fullstackclj.proto Request])
+  (:import [com.google.protobuf InvalidProtocolBufferException]))
 
 (def method_regx #"(?i)(?:GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS|TRACE|CONNECT)")
 (def http_vers_regx #"(?i)(?:HTTP)\/\d\.\d")
@@ -26,16 +28,23 @@
 (defn handle_rest
   "Handles a rest request"
   [request]
-  (println "http request: " request)
   (test-handler request))
 
 (defn handle_rpc
   "Handles a rpc request"
   [procedure byte_str]
-  (let [proto (Request/parseFrom (.getBytes byte_str))]
-    (println "rpc request: " (.toString proto))
+  (try
     (case procedure
-      "test-procedure" (test-procedure proto))))
+      "test-procedure" (let [proto (Request/parseFrom (.getBytes byte_str))]
+                         (test-procedure proto)))
+    (catch InvalidProtocolBufferException pb_exc
+      (println "Invalid rpc request: " byte_str "\n cause: " (.getMessage pb_exc))
+      (rest/response {:http_vers "HTTP/1.1"
+                      :status_code 400
+                      :status_info "BAD REQUEST"
+                      :headers {"Content-Encoding" "UTF-8"
+                                "Content-Type" "Application/text"}
+                      :body (str "Invalid RPC request for /" procedure " procedure")}))))
 
 (defn handle
   "Wrapper for handling http requests"

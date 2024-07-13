@@ -10,7 +10,6 @@
   [client-socket]
   (with-open [in (BufferedReader. (InputStreamReader. (.getInputStream client-socket)))
               out (PrintWriter. (.getOutputStream client-socket) true)]
-    ;; TODO: add middleware to determine request type -> http, rpc or not_supported?
     (let [req_line (.readLine in)
           headers (loop [lines (.readLine in) header {}]
                     (let [header_kv (str/split lines #":\s")]
@@ -33,4 +32,5 @@
     (while true
       (let [client-socket (.accept server-socket)]
         (println "Client connected. Address: " (str (.getRemoteSocketAddress client-socket)))
+        ;;TODO: add MAX_THREADS limit
         (.start (Thread. #(handle-client client-socket)))))))
