@@ -6,9 +6,13 @@
            (java.net InetAddress ServerSocket)))
 
 (defn handle-client
-  "Handle socket connection"
+  "Handle socket connection
+   
+   Returns: the final response that is sent back to the socket connection
+   "
   [client-socket]
   (with-open [in (BufferedReader. (InputStreamReader. (.getInputStream client-socket)))
+              ;;TODO : use BufferedWriter
               out (PrintWriter. (.getOutputStream client-socket) true)]
     (let [req_line (.readLine in)
           headers (loop [lines (.readLine in) header {}]
@@ -21,8 +25,11 @@
           request (http/parse [req_line headers ""])]
       (.read in body 0 content_len)
       ;;TODO: Auth
-      (.println out (http/handle (assoc request :body (String. body)))))
-    (.flush out)))
+      ;;FIXME? is it okay to yield the final response -> for testing, maybe?
+      (let [response (http/handle (assoc request :body (String. body)))]
+        (.println out response)
+        (.flush out)
+        response))))
 
 (defn start-server
   "Start the server"

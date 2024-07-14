@@ -17,6 +17,7 @@
   [request]
   (let [req_line (first request)
         method (re-find method_regx req_line)
+        ;;TODO? exract url using regex
         url (second (str/split req_line #"\s"))
         http_vers (re-find http_vers_regx req_line)
         headers (second request)
@@ -49,6 +50,7 @@
 (defn handle
   "Wrapper for handling http requests"
   [{:keys [method url headers body]}]
+  (println method url headers body)
   ;; TODO: Verify request -> rpc: content-type:application/octet-stream, method:post...rest?
   (if (nil? (re-find #"^(?:/rpc/.*)" url))
     (handle_rest {:method method :url url :headers headers :body body})

@@ -4,4 +4,5 @@
 (defn test-procedure
   "Test procedure"
   [request]
+  (println "test-procedure request: " (.toString request))
   (rpc/response "HTTP/1.1" 200 "SUCCESS" {"Content-Encoding" "UTF-8"} request))
