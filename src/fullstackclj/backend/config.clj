@@ -1,5 +1,5 @@
 (ns fullstackclj.backend.config)
 
-(def PORT 8888)
+(def PORT 80)
 (def BACKLOG 10)
-(def ADDRESS "127.0.0.1")
+(def ADDRESS "0.0.0.0")
