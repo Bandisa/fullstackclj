@@ -9,4 +9,7 @@
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}}
   :java-source-paths ["src/fullstackclj/resources/protobuf/com/fullstackclj"]
-  :plugins [[lein-cloverage "1.2.2"]])
+  :plugins [[lein-cloverage "1.2.2"]]
+  :test-selectors {:default (complement :integration)
+                   :unit :unit
+                   :integration :integration})

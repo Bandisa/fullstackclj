@@ -24,14 +24,32 @@ test github actions locally
 
 ### Testing
 
-Run unit tests without any coverage
+Run all tests without any coverage
 
 ```sh
     lein test
 ```
 
-Run unit tests and generate test coverage
+Run all unit tests without any coverage
+
+```sh
+    lein test :unit
+```
+
+Run all integration tests without any coverage
+
+```sh
+    lein test :integration
+```
+
+Run tests and generate test coverage
 
 ```sh
     lein cloverage
+```
+
+Run a specific test with the namespace <my.namespace/my-test>
+
+```sh
+    lein test :only <my.namespace/my-test>
 ```

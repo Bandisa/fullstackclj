@@ -3,6 +3,8 @@
 
 (defn test-handler
   [request]
+  (println "test-handler request: " request)
   (rest/response {:http_vers "HTTP/1.1" :status_code 200 :status_info "SUCCESS"
-                  :headers {"Content-type" "text/plain"}
+                  :headers {"Content-type" "text/plain"
+                            "Content-Encoding" "UTF-8"}
                   :body (get request :body "")}))
