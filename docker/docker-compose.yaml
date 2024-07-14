@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  fullstackclj_backend:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8888:80"
+    restart: "no"
