@@ -17,7 +17,6 @@
   [request]
   (let [req_line (first request)
         method (re-find method_regx req_line)
-        ;;TODO? exract url using regex
         url (second (str/split req_line #"\s"))
         http_vers (re-find http_vers_regx req_line)
         headers (second request)

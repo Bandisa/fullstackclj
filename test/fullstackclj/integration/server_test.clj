@@ -14,10 +14,17 @@
 
 (deftest  ^:integration int-test
   (testing "Should return a valid http response"
-    (is (= "HTTP/1.1 200 SUCCESS\r\nContent-type: text/plain\r\nContent-Encoding: UTF-8\r\nContent-Length: 13\r\n\r\nhttp response\r\n"
+    (is (= (str "HTTP/1.1 200 SUCCESS\r\n"
+                "Content-type: text/plain\r\n"
+                "Content-Encoding: UTF-8\r\n"
+                "Content-Length: 13\r\n\r\n"
+                "http response\r\n")
            (handle-client (mock-client-socket
                            (.getBytes
-                            "GET / HTTP/1.1\r\nContent-type: text/plain\r\nContent-Length: 13\r\n\r\nhttp response\r\n"
+                            (str "GET / HTTP/1.1\r\n"
+                                 "Content-type: text/plain\r\n"
+                                 "Content-Length: 13\r\n\r\n"
+                                 "http response\r\n")
                             "UTF-8"))))))
   (testing "Should return a valid rpc response"
     (is (= (str "HTTP/1.1 200 SUCCESS\r\nContent-Encoding: UTF-8\r\nContent-type: application/octet-stream\r\n"
@@ -30,4 +37,5 @@
                                                           "Content-Length: " (alength test_rpc_body) "\r\n\r\n"
                                                           (slurp test_rpc_body
                                                                  :encoding "UTF-8")))))))))
+;; TODO: Add more test cases
 

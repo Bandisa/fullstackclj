@@ -43,4 +43,3 @@
                             "Content-Encoding" "UTF-8"}
                   :body "invalid rpc body"}))))
 
-;; TODO: Integration test
